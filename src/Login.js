@@ -6,17 +6,14 @@ const Login = ({ onLogin }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Perform authentication logic here
-        // You can use a mock authentication for demonstration purposes
 
-        // Simulate a successful login
         if (username === '1' && password === '1') {
             onLogin();
         } else {
             alert('Invalid credentials');
         }
 
-        // Clear the form
+
         setUsername('');
         setPassword('');
     };
