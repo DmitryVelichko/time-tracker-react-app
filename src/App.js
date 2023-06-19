@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
+import Login from './Login';
 
 function App() {
   const [timeEntries, setTimeEntries] = useState([]);
   const [hours, setHours] = useState('');
   const [description, setDescription] = useState('');
   const [project, setProject] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const entriesFromLocalStorage = localStorage.getItem('timeEntries');
+    if (entriesFromLocalStorage) {
+      setTimeEntries(JSON.parse(entriesFromLocalStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('timeEntries', JSON.stringify(timeEntries));
+    return () => {
+      localStorage.removeItem('timeEntries');
+    };
+  }, [timeEntries]);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
 
 
   const handleSubmit = (e) => {
@@ -26,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <h1>Time Tracker</h1>
-
+      {isLoggedIn ? (<>
         <form onSubmit={handleSubmit}>
           <label>
             Hours:
@@ -37,7 +56,7 @@ function App() {
             />
           </label>
           <label>
-            Description:
+            Desc.:
             <input
               type="text"
               value={description}
@@ -48,9 +67,9 @@ function App() {
             Project:
             <select value={project} onChange={(e) => setProject(e.target.value)}>
               <option value="">Select Project</option>
-              <option value="Project A">Project 1</option>
-              <option value="Project B">Project 2</option>
-              <option value="Project C">Project 3</option>
+              <option value="Project A">Project A</option>
+              <option value="Project B">Project B</option>
+              <option value="Project C">Project C</option>
             </select>
           </label>
           <button type="submit">Add Entry</button>
@@ -76,7 +95,9 @@ function App() {
             ))}
           </tbody>
         </table>
-      
+      </>) :
+        <Login onLogin={handleLogin} />
+      }
     </div>
   );
 }
