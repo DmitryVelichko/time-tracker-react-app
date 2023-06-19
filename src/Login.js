@@ -10,7 +10,7 @@ const Login = ({ onLogin }) => {
         // You can use a mock authentication for demonstration purposes
 
         // Simulate a successful login
-        if (username === 'user' && password === 'password') {
+        if (username === '1' && password === '1') {
             onLogin();
         } else {
             alert('Invalid credentials');

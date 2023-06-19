@@ -42,6 +42,13 @@ function App() {
     setProject('');
   };
 
+  const handleDeleteEntry = (entry) => {
+    setTimeEntries((prevEntries) =>
+      prevEntries.filter((prevEntry) => prevEntry !== entry)
+    );
+  };
+
+
   return (
     <div className="App">
       <h1>Time Tracker</h1>
@@ -86,11 +93,12 @@ function App() {
           </thead>
           <tbody>
             {timeEntries.map((entry, index) => (
-              <tr key={index}>
+              <tr key={entry.id}>
                 <td>{entry.hours}</td>
                 <td>{entry.description}</td>
                 <td>{entry.project}</td>
                 <td>{entry.date}</td>
+                <td><button className='delete-button' onClick={() => handleDeleteEntry(entry)}>Delete</button></td>
               </tr>
             ))}
           </tbody>

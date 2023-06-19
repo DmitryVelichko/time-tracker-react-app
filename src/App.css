@@ -58,3 +58,16 @@ td {
   font-weight: bold;
   margin-top: 10px;
 }
+
+button.delete-button {
+  padding: 4px 8px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.delete-button:hover {
+  background-color: #c82333;
+}
